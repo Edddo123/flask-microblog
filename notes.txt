@@ -1,0 +1,4 @@
+flask db migrate -m "posts table" - creates migration
+flask db upgrade - runs migration
+flask db init - initializes db
+flask run --debug - runs app in hotreload mode
