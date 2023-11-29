@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -17,6 +17,11 @@ migrate = Migrate(app, db)
 login = LoginManager(app)
 login.login_view = 'login'
 mail = Mail(app)
+
+
+# ...
+
+
 
 if not app.debug:
     if app.config['MAIL_SERVER']:
