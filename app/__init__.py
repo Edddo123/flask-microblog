@@ -8,9 +8,16 @@ from logging.handlers import SMTPHandler
 import os
 from logging.handlers import RotatingFileHandler
 from flask_mail import Mail
+from app.errors import bp as errors_bp
+from app.auth import bp as auth_bp
 
 # This is app variable instance of flask
 app = Flask(__name__)
+app.register_blueprint(errors_bp)
+app.register_blueprint(auth_bp, url_prefix='/auth')
+
+
+
 app.config.from_object(Config)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
@@ -51,4 +58,4 @@ if not app.debug:
     app.logger.info('Microblog startup')
 
 # This app is module, we named directoy app and created init.py. So we created app directory.
-from app import routes, models, errors
+from app import routes, models # errors - do not need errors as I moved it out to blueprint
